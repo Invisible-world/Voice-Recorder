@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="content">
+    <div class="btn-wrapper">
+      <div class="btn-start" *ngIf="!isRecording && !blobUrl">
+        <button class="mic start" (click)="startRecording()">
+          <img class="mic-icon" src="../assets/mic.svg" />
+        </button>
+        <span>Start Recording</span>
+      </div>
+      <button
+        class="mic stop"
+        *ngIf="isRecording && !blobUrl"
+        (click)="stopRecording()"
+      >
+        <img class="mic-icon" src="../assets/mic-off.svg" />
+      </button>
+      <button
+        class="mic cancel"
+        *ngIf="!isRecording && blobUrl"
+        (click)="clearRecordedData()"
+      >
+        <img class="mic-icon" src="../assets/clear.svg" />
+      </button>
+    </div>
+    <div class="time" *ngIf="isRecording && !blobUrl">{{ recordedTime }}</div>
+    <audio *ngIf="!isRecording && blobUrl" controls>
+      <source [src]="blobUrl" type="audio/webm" />
+    </audio>
+  </div>
+</div>
